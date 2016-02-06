@@ -6,55 +6,55 @@ type Enrichment struct {
 }
 
 type Person struct {
-	ID         *string     `json:"id"`
-	Name       *Name       `json:"name"`
-	Email      *string     `json:"email"`
-	Gender     *string     `json:"gender"`
-	Location   *string     `json:"location"`
-	TimeZone   *string     `json:"timeZone"`
-	UtcOffset  *int        `json:"utcOffset"`
-	Geo        *Geo        `json:"geo"`
-	Bio        *string     `json:"bio"`
-	Site       *string     `json:"site"`
-	Avatar     *string     `json:"avatar"`
-	Employment *Job        `json:"employment"`
-	Facebook   *Facebook   `json:"facebook"`
-	Github     *Github     `json:"github"`
-	Twitter    *Twitter    `json:"twitter"`
-	Linkedin   *Linkedin   `json:"linkedin"`
-	Googleplus *Googleplus `json:"googleplus"`
-	Aboutme    *Aboutme    `json:"aboutme"`
-	Gravatar   *Gravatar   `json:"gravatar"`
-	Fuzzy      *bool       `json:"fuzzy"`
+	ID         *string        `json:"id"`
+	Name       *Name          `json:"name"`
+	Email      *string        `json:"email"`
+	Gender     *string        `json:"gender"`
+	Location   *string        `json:"location"`
+	TimeZone   *string        `json:"timeZone"`
+	UtcOffset  *int           `json:"utcOffset"`
+	Geo        *Geo           `json:"geo"`
+	Bio        *string        `json:"bio"`
+	Site       *string        `json:"site"`
+	Avatar     *string        `json:"avatar"`
+	Employment *Employment    `json:"employment"`
+	Facebook   *SimpleProfile `json:"facebook"`
+	Github     *Github        `json:"github"`
+	Twitter    *Twitter       `json:"twitter"`
+	Linkedin   *SimpleProfile `json:"linkedin"`
+	Googleplus *SimpleProfile `json:"googleplus"`
+	Aboutme    *Aboutme       `json:"aboutme"`
+	Gravatar   *Gravatar      `json:"gravatar"`
+	Fuzzy      *bool          `json:"fuzzy"`
 }
 
 type Company struct {
-	ID            *string     `json:"id"`
-	Name          *string     `json:"name"`
-	LegalName     *string     `json:"legalName"`
-	Domain        *string     `json:"domain"`
-	DomainAliases []string    `json:"domainAliases"`
-	URL           *string     `json:"url"`
-	Site          *Site       `json:"site"`
-	Category      *Category   `json:"category"`
-	Tags          []string    `json:"tags"`
-	Description   *string     `json:"description"`
-	FoundedDate   *string     `json:"foundedDate"`
-	Location      *string     `json:"location"`
-	TimeZone      *string     `json:"timeZone"`
-	UtcOffset     *int        `json:"utcOffset"`
-	Geo           *Geo        `json:"geo"`
-	Logo          *string     `json:"logo"`
-	Facebook      *Facebook   `json:"facebook"`
-	Linkedin      *Linkedin   `json:"linkedin"`
-	Twitter       *Twitter    `json:"twitter"`
-	Crunchbase    *Crunchbase `json:"crunchbase"`
-	EmailProvider *bool       `json:"emailProvider"`
-	Type          *string     `json:"type"`
-	Ticker        *string     `json:"ticker"`
-	Phone         *string     `json:"phone"`
-	Metrics       *Metrics    `json:"metrics"`
-	Tech          []string    `json:"tech"`
+	ID            *string         `json:"id"`
+	Name          *string         `json:"name"`
+	LegalName     *string         `json:"legalName"`
+	Domain        *string         `json:"domain"`
+	DomainAliases []string        `json:"domainAliases"`
+	URL           *string         `json:"url"`
+	Site          *Site           `json:"site"`
+	Category      *Category       `json:"category"`
+	Tags          []string        `json:"tags"`
+	Description   *string         `json:"description"`
+	FoundedDate   *string         `json:"foundedDate"`
+	Location      *string         `json:"location"`
+	TimeZone      *string         `json:"timeZone"`
+	UtcOffset     *int            `json:"utcOffset"`
+	Geo           *Geo            `json:"geo"`
+	Logo          *string         `json:"logo"`
+	Facebook      *SimpleProfile  `json:"facebook"`
+	Linkedin      *SimpleProfile  `json:"linkedin"`
+	Twitter       *CompanyTwitter `json:"twitter"`
+	Crunchbase    *SimpleProfile  `json:"crunchbase"`
+	EmailProvider *bool           `json:"emailProvider"`
+	Type          *string         `json:"type"`
+	Ticker        *string         `json:"ticker"`
+	Phone         *string         `json:"phone"`
+	Metrics       *Metrics        `json:"metrics"`
+	Tech          []string        `json:"tech"`
 }
 
 type Name struct {
@@ -77,12 +77,16 @@ type Geo struct {
 	Lng          *float64 `json:"lng"`
 }
 
-type Job struct {
+type Employment struct {
 	Domain    *string `json:"domain"`
 	Name      *string `json:"name"`
 	Title     *string `json:"title"`
 	Role      *string `json:"role"`
 	Seniority *string `json:"seniority"`
+}
+
+type SimpleProfile struct {
+	Handle *string `json:"handle"`
 }
 
 type Github struct {
@@ -108,53 +112,21 @@ type Twitter struct {
 	Avatar    *string `json:"avatar"`
 }
 
-type Facebook struct {
-	Handle *string `json:"handle"`
-}
-
-type Googleplus struct {
-	Handle *string `json:"handle"`
-}
-
-type Linkedin struct {
-	Handle *string `json:"handle"`
-}
-
-type Crunchbase struct {
-	Handle *string `json:"handle"`
+type CompanyTwitter struct {
+	Handle    *string `json:"handle"`
+	ID        *string `json:"id"`
+	Bio       *string `json:"bio"`
+	Followers *int    `json:"followers"`
+	Following *int    `json:"following"`
+	Location  *string `json:"location"`
+	Site      *string `json:"site"`
+	Avatar    *string `json:"avatar"`
 }
 
 type Aboutme struct {
 	Handle *string `json:"handle"`
 	Bio    *string `json:"bio"`
 	Avatar *string `json:"avatar"`
-}
-
-type Gravatar struct {
-	Handle  *string  `json:"handle"`
-	Urls    []string `json:"urls"`
-	Avatar  *string  `json:"avatar"`
-	Avatars []Avatar `json:"avatars"`
-}
-
-type Avatar struct {
-	URL  *string `json:"url"`
-	Type *string `json:"type"`
-}
-
-type Site struct {
-	URL             *string `json:"url"`
-	Title           *string `json:"title"`
-	H1              *string `json:"h1"`
-	MetaDescription *string `json:"metaDescription"`
-	MetaAuthor      *string `json:"metaAuthor"`
-}
-
-type Category struct {
-	Sector        *string `json:"sector"`
-	IndustryGroup *string `json:"industryGroup"`
-	Industry      *string `json:"industry"`
-	SubIndustry   *string `json:"subIndustry"`
 }
 
 type Metrics struct {
@@ -165,4 +137,36 @@ type Metrics struct {
 	MarketCap       *float64 `json:"marketCap"`
 	Raised          *float64 `json:"raised"`
 	AnnualRevenue   *float64 `json:"annualRevenue"`
+}
+
+type Category struct {
+	Sector        *string `json:"sector"`
+	IndustryGroup *string `json:"industryGroup"`
+	Industry      *string `json:"industry"`
+	SubIndustry   *string `json:"subIndustry"`
+}
+
+type Site struct {
+	URL             *string `json:"url"`
+	Title           *string `json:"title"`
+	H1              *string `json:"h1"`
+	MetaDescription *string `json:"metaDescription"`
+	MetaAuthor      *string `json:"metaAuthor"`
+}
+
+type Gravatar struct {
+	Handle  *string  `json:"handle"`
+	Urls    []URL    `json:"urls"`
+	Avatar  *string  `json:"avatar"`
+	Avatars []Avatar `json:"avatars"`
+}
+
+type URL struct {
+	Value *string `json:"value"`
+	Title *string `json:"title"`
+}
+
+type Avatar struct {
+	URL  *string `json:"url"`
+	Type *string `json:"type"`
 }
