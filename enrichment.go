@@ -199,3 +199,20 @@ func (s *EnrichmentService) GetCombined(email string) (*Enrichment, error) {
 
 	return e, err
 }
+
+func (s *EnrichmentService) GetPerson(email string) (*Person, error) {
+	url := fmt.Sprintf("%s?email=%s", enrichmentURL, email)
+
+	req, err := s.client.NewRequest("GET", url, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	e := &Person{}
+	err = s.client.Do(req, e)
+	if err != nil {
+		return nil, err
+	}
+
+	return e, err
+}
