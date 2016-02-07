@@ -1,5 +1,16 @@
 package clearbit
 
+import "fmt"
+
+const (
+	enrichmentURL = "https://person.clearbit.com/v2/combined/find"
+	personURL     = "https://person.clearbit.com/v2/people/find"
+)
+
+type EnrichmentService struct {
+	client *Client
+}
+
 type Enrichment struct {
 	Person  *Person  `json:"person"`
 	Company *Company `json:"company"`
@@ -85,6 +96,7 @@ type Employment struct {
 	Seniority *string `json:"seniority"`
 }
 
+// SimpleProfile is used by services which only provide a handle (e.g. Facebook, LinkedIn)
 type SimpleProfile struct {
 	Handle *string `json:"handle"`
 }
@@ -169,4 +181,21 @@ type URL struct {
 type Avatar struct {
 	URL  *string `json:"url"`
 	Type *string `json:"type"`
+}
+
+func (s *EnrichmentService) GetCombined(email string) (*Enrichment, error) {
+	url := fmt.Sprintf("%s?email=%s", enrichmentURL, email)
+
+	req, err := s.client.NewRequest("GET", url, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	e := &Enrichment{}
+	err = s.client.Do(req, e)
+	if err != nil {
+		return nil, err
+	}
+
+	return e, err
 }
