@@ -201,7 +201,7 @@ func (s *EnrichmentService) GetCombined(email string) (*Enrichment, error) {
 }
 
 func (s *EnrichmentService) GetPerson(email string) (*Person, error) {
-	url := fmt.Sprintf("%s?email=%s", enrichmentURL, email)
+	url := fmt.Sprintf("%s?email=%s", personURL, email)
 
 	req, err := s.client.NewRequest("GET", url, nil)
 	if err != nil {

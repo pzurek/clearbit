@@ -20,7 +20,6 @@ type Client struct {
 	key       string
 	UserAgent string
 
-	// Services used for talking to different parts of the GitHub API.
 	Enrichements *EnrichmentService
 }
 
@@ -93,7 +92,10 @@ func CheckResponse(r *http.Response) error {
 	errorResponse := &ErrorResponse{Response: r}
 	data, err := ioutil.ReadAll(r.Body)
 	if err == nil && data != nil {
-		json.Unmarshal(data, errorResponse)
+		err = json.Unmarshal(data, errorResponse)
+		if err != nil {
+			return err
+		}
 	}
 	return errorResponse
 }
