@@ -159,11 +159,13 @@ type Category struct {
 }
 
 type Site struct {
-	URL             *string `json:"url"`
-	Title           *string `json:"title"`
-	H1              *string `json:"h1"`
-	MetaDescription *string `json:"metaDescription"`
-	MetaAuthor      *string `json:"metaAuthor"`
+	URL             *string  `json:"url"`
+	Title           *string  `json:"title"`
+	H1              *string  `json:"h1"`
+	MetaDescription *string  `json:"metaDescription"`
+	MetaAuthor      *string  `json:"metaAuthor"`
+	PhoneNumbers    []string `json:"phoneNumbers"`
+	EmailAddresses  []string `json:"emailAddresses"`
 }
 
 type Gravatar struct {
